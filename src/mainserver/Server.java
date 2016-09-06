@@ -5,6 +5,10 @@
  */
 package mainserver;
 
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import mainserver.services.MainServices;
+
 /**
  *
  * @author Israel Dago
@@ -15,7 +19,12 @@ public class Server {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            Registry registru = LocateRegistry.createRegistry(4545);
+            registru.rebind("spitalServer", new MainServices());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }
